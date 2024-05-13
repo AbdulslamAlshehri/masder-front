@@ -59,6 +59,7 @@ const Fact_Arabic_Form = () => {
       set_Upload_Status('Text uploaded successfully');
       set_Determination_Result("خبر صحيح");
       set_Percentage(percentage + response.data.prediction)
+      Submit_Form();
     } catch (error) {
       console.error('Error uploading text', error);
       set_Upload_Status('Error uploading text');
