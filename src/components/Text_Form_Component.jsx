@@ -53,10 +53,13 @@ const Text_Form_Component = () => {
     console.log('Show Text submitted:', text);
 
     try {
-      const response = await axios.post('YOUR_API_ENDPOINT', { text });
+      const response = await axios.post('https://masdar2-production.up.railway.app/ai/text', { text });
 
       console.log('Text uploaded successfully', response.data);
       set_Upload_Status('Text uploaded successfully');
+      set_Percentage("accuracy: " + response.data.score)
+      setContentType("Text")
+      Submit_Form()
     } catch (error) {
       console.error('Error uploading text', error);
       set_Upload_Status('Error uploading text');
@@ -89,7 +92,7 @@ const Text_Form_Component = () => {
             )}
             {text && !error_Visible ? (
               <div style={{ textAlign: "center" }}>                                         
-                <Button variant="dark" className={"D12 D11"} type="submit" onClick={Submit_Form} centered>Submit</Button>
+                <Button variant="dark" className={"D12 D11"} type="submit" centered>Submit</Button>
               </div>
             ) : (
               <div style={{ textAlign: "center" }}>
