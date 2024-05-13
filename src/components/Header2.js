@@ -70,7 +70,7 @@ import axios from "axios";
               id="nav-dropdown-dark-example"
               title= {title}                              //{title} // Use the title from the state
               menuVariant="dark"
-            >     <NavDropdown.Item onClick={  () =>{navigate('/testingpage');} }>check</NavDropdown.Item>   <br/>
+            >     <NavDropdown.Item onClick={  () =>{navigate('/MainPage');} }>check</NavDropdown.Item>   <br/>
      <NavDropdown.Item onClick={handlehistory}>History</NavDropdown.Item>
             
               <NavDropdown.Divider />
