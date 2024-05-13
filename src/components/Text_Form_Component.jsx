@@ -43,7 +43,7 @@ const Text_Form_Component = () => {
     }
   };
 
-    const Handle_Form_Submit = async (event) => {
+    const handleformsubmit = async (event) => {
     event.preventDefault();
     console.log('Show Text submitted:', text);
 
