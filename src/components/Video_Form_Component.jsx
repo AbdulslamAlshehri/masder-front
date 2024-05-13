@@ -61,7 +61,7 @@ const Video_Form_Component = () => {
     Form_Data.append('video', video);
 
     try {
-      const Response = await axios.post('YOUR_VIDEO_API_ENDPOINT', Form_Data, {
+      const Response = await axios.post('https://masdar2-production.up.railway.app/ai/video', Form_Data, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -69,6 +69,11 @@ const Video_Form_Component = () => {
 
       console.log('Video uploaded successfully', Response.data);
       set_Upload_Status('Video uploaded successfully');
+      var percentage = response.data.percentage * 100;
+      percentage = percentage.toFixed(2);
+      set_Percentage(percentage)
+      setContentType("Video")
+      Submit_Form()
     } catch (Error) {
       console.Error('Error uploading video', Error);
       set_Upload_Status('Error uploading video');
