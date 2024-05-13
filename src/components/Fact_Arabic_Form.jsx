@@ -122,11 +122,11 @@ const Fact_Arabic_Form = () => {
                   <div style={{ width: "100%", textAlign: 'right', direction: "rtl" }}>
       <Stack gap={3}>
         <div id="scroll" style={{ maxHeight: "600px", overflowY: "auto", borderRadius: "5px", backgroundColor: "white", minHeight: "400px" }}>
-          <div className="p-2"><h5 style={{ display: "inline" }}>ادعاء: </h5>{Cliam_Result}</div>
+  
           <div className="p-2"><h5 style={{ display: "inline" }}>تحديد: </h5>{Determination_Result}</div>
-          <div className="p-2"><h5 style={{ display: "inline" }}>التفسير: </h5>{Explanation_Result}</div>
+
           <div className="p-2"><h5 style={{ display: "inline" }}>النسبة: </h5>{percentage}%</div>
-          <div className="p-2"><h5>مصدر:</h5>
+
             <ul style={{ listStyleType: "none" }}>
               {Links.map(link => (
                 <li style={{ margin: "0% 0% 0% 6%" }} className="p-2" key={link.id}><a href={link.url}>{link.title}</a></li>
