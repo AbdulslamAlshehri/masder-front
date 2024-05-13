@@ -54,8 +54,8 @@ const Text_Form_Component = () => {
     
       // const response = await 
       axios.post('https://masdar2-production.up.railway.app/ai/text', { text })
-      .then( response => {
-      
+  .then(response => {
+      console.log('Text uploaded successfully', response.data);
       console.log('Text uploaded successfully', response.data);
       set_Upload_Status('Text uploaded successfully');
       var percentage = response.data.score * 100;
@@ -63,10 +63,11 @@ const Text_Form_Component = () => {
       set_Percentage(percentage)
       setContentType("Text");
       Submit_Form()};
-    ).catch (error) {
+  })
+  .catch(error => {
       console.error('Error uploading text', error);
       set_Upload_Status('Error uploading text');
-    }
+  });
   };
 
   return (
