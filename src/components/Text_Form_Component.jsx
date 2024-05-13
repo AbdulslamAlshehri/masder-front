@@ -43,17 +43,22 @@ const Text_Form_Component = () => {
     }
   };
 
-  const handleFormSubmit = async (Event) => {
-    Event.preventDefault();
+    const Handle_Form_Submit = async (event) => {
+    event.preventDefault();
     console.log('Show Text submitted:', text);
 
     try {
-      const response = await axios.post('YOUR_API_ENDPOINT', { text });
-
-      console.log('Text uploaded successfully', response.data);
+      const Response = await axios.post('https://masdar2-production.up.railway.app/ai/text', { text });
+      set_Provided_content("Text: " + text)
+      console.log('Text uploaded successfully', Response.data);
       set_Upload_Status('Text uploaded successfully');
-    } catch (error) {
-      console.error('Error uploading text', error);
+      var percentage = Response.data.score * 100;
+      percentage = percentage.toFixed(2);
+      console.log(percentage)
+      set_Cliam_Result(percentage + " is AI")
+      Submit_Form()
+    } catch (Error) {
+      console.error('Error uploading text', Error);
       set_Upload_Status('Error uploading text');
     }
   };
@@ -84,7 +89,7 @@ const Text_Form_Component = () => {
             )}
             {text && !error_Visible ? (
               <div style={{ textAlign: "center" }}>                                         
-                <Button variant="dark" className={"D12 D11"} type="submit" onClick={Submit_Form} centered>Submit</Button>
+                <Button variant="dark" className={"D12 D11"} type="submit" centered>Submit</Button>
               </div>
             ) : (
               <div style={{ textAlign: "center" }}>
