@@ -207,7 +207,6 @@ const Video_Form_Component = () => {
             <Row>
               <Col style={{ textAlign: "center" }}>AI</Col>
               <Col style={{ textAlign: "center" }}>Content Type</Col>
-              <Col style={{ textAlign: "center" }}>Submit Date</Col>
             </Row>
           </Container>
         </div>
