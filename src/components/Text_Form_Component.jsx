@@ -62,7 +62,7 @@ const Text_Form_Component = () => {
       percentage = percentage.toFixed(2);
       set_Percentage(percentage)
       setContentType("Text");
-      Submit_Form()}
+      Submit_Form()};
     ).catch (error) {
       console.error('Error uploading text', error);
       set_Upload_Status('Error uploading text');
