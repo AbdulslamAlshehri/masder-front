@@ -5,7 +5,7 @@ import Ai_Check_Component from "./Ai_Check_Component";
 import Fact_Check_Component from "./Fact_Check_Component.jsx.jsx";
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
-
+import Header_2 from './Header_2';
 function Ai_Check_Page() {
   return <Ai_Check_Component/>;
 }
@@ -24,7 +24,7 @@ const MainPage = () => {
   };
 
   return (
-   
+     <Header_2/>
     <div className="BG" style={{marginTop:"100px"}}>
 
       <div style={{ background: "white", margin: "20px", borderRadius: "5px", minHeight: "600px", color: "black", padding: "50px" }}>
