@@ -72,7 +72,7 @@ const Fact_Arabic_Form = () => {
       console.error('Error uploading text', error);
       set_Upload_Status('Error uploading text');
     }
-  };
+  
 
   return (
     <>
