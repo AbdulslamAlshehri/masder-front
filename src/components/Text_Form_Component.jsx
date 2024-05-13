@@ -51,7 +51,6 @@ const Text_Form_Component = () => {
   const Handle_Form_Submit = async (Event) => {
     Event.preventDefault();
     console.log('Show Text submitted:', text);
-
     try {
       const response = await axios.post('https://masdar2-production.up.railway.app/ai/text', { text });
 
