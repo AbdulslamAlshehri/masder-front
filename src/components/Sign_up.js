@@ -122,7 +122,7 @@ function Sign_up(){
          const confirmationCode = e.target.elements.confirmationCode.value;
          console.log('Sending the confirmation code to the backend:', { userId: userId2, confirmationCode});          //هنا نشوف اذا فيه قيمه بتنرسل للباك اند ولا لا  
         //put the endpoints inside ('/your-endpoint')   مهم!!!
-         axios.post('http://localhost:5000/api/users/verifyOTP',  { userId: userId2, otp: confirmationCode })
+         axios.post('https://masdar2-production.up.railway.app/api/users/verifyOTP',  { userId: userId2, otp: confirmationCode })
          .then(response => {
           if (response.data.success === true) {                                                     //اذا الكود اللي دخله نفس اللي ارسلناه لايميله ترجع ترو 
          console.log('account created succefully');                               
