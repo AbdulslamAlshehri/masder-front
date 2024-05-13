@@ -66,7 +66,7 @@ const Fact_Arabic_Form = () => {
         percentage = percentage % 100
         set_Determination_Result("خبر زائف");
         set_Percentage(percentage)}
-      }
+      
       Submit_Form();
     } catch (error) {
       console.error('Error uploading text', error);
