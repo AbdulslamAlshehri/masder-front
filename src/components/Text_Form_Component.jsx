@@ -57,7 +57,9 @@ const Text_Form_Component = () => {
 
       console.log('Text uploaded successfully', response.data);
       set_Upload_Status('Text uploaded successfully');
-      set_Percentage("accuracy: " + response.data.score)
+      var percentage = Response.data.score * 100;
+      percentage = percentage.toFixed(2);
+      set_Percentage(percentage)
       setContentType("Text")
       Submit_Form()
     } catch (error) {
