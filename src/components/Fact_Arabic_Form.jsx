@@ -57,8 +57,16 @@ const Fact_Arabic_Form = () => {
 
       console.log('Text uploaded successfully', response.data);
       set_Upload_Status('Text uploaded successfully');
+      var percentage = response.data.prediction * 100;
+      percentage = percentage.toFixed(2);
+      if(percentage > 60){
       set_Determination_Result("خبر صحيح");
-      set_Percentage(percentage + response.data.prediction)
+      set_Percentage(percentage)}
+      else{
+        percentage = percentage % 100
+        set_Determination_Result("خبر زائف");
+        set_Percentage(percentage)}
+      }
       Submit_Form();
     } catch (error) {
       console.error('Error uploading text', error);
