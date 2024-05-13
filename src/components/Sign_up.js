@@ -168,11 +168,11 @@ navigate('/Signin');
   controlId="floatingInput"
   label="Name"
   className="mb-3"
-  id="Name"
+  id="name"
 >
-  <Form.Control name="Name" placeholder="" onChange={handleChange} value={formData.name}/>
+  <Form.Control name="name" placeholder="" onChange={handleChange} value={formData.name}/>
 </FloatingLabel>
-        {errors.Name && <div className="error">{errors.Name}</div>}
+        {errors.name && <div className="error">{errors.name}</div>}
         <FloatingLabel 
   controlId="floatingInput2"
   label="Email address"
