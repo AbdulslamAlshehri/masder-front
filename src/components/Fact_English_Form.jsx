@@ -124,7 +124,7 @@ const Text_Form_Component = () => {
                       <div className="p-2"><h5 style={{ display: "inline" }}>Determination: </h5>{Determination_Result}</div>
                       <div className="p-2"><h5 style={{ display: "inline" }}>Percentage: </h5>{percentage}%</div>
                         </div>
-                    
+                    </div>
                   </Stack>
                     </div>
                   <div style={{textAlign:"right"}}>
