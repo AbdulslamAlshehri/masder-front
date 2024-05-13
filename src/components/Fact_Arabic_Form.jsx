@@ -53,10 +53,12 @@ const Fact_Arabic_Form = () => {
     console.log('Show Text submitted:', text);
 
     try {
-      const response = await axios.post('YOUR_API_ENDPOINT', { text });
+      const response = await axios.post('masdar-production.up.railway.app/predict/ar', { text });
 
       console.log('Text uploaded successfully', response.data);
       set_Upload_Status('Text uploaded successfully');
+      set_Determination_Result("خبر صحيح");
+      set_Percentage(percentage + response.data.prediction)
     } catch (error) {
       console.error('Error uploading text', error);
       set_Upload_Status('Error uploading text');
@@ -89,7 +91,7 @@ const Fact_Arabic_Form = () => {
             )}
             {text && !error_Visible ? (
               <div style={{ textAlign: "center" }}>                                         
-                <Button variant="dark" className={"D12 D11"} type="submit" onClick={Submit_Form} centered>Submit</Button>
+                <Button variant="dark" className={"D12 D11"} type="submit" centered>Submit</Button>
               </div>
             ) : (
               <div style={{ textAlign: "center" }}>
