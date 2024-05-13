@@ -133,7 +133,6 @@ const Fact_Arabic_Form = () => {
               ))}
             </ul>
           </div>
-        </div>
       </Stack>
     </div>
                   <div style={{textAlign:"left"}}>
