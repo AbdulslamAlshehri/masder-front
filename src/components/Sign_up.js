@@ -23,7 +23,7 @@ function Sign_up(){
   const [BEerror, setBEerror] = useState(false);
 
   const validationSchema = Yup.object({
-    Name: Yup.string().required("-Name is Required"),
+    name: Yup.string().required("-Name is Required"),
     email: Yup.string()
       .required("-Email is Required")
       .email("-Invalid email format"),
