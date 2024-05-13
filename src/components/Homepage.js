@@ -7,9 +7,11 @@ import Header_2 from './Header_2';
 import {Link} from "react-router-dom";
 import AI from './AI.jpeg';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 function Homepage() {
   const [hover, setHover] = useState(false);
-
+  const navigate = useNavigate();
 
 
     return (
@@ -29,7 +31,7 @@ function Homepage() {
 
   
   <p style={ { fontSize: "17px", marginTop:"70px"}}> Masdar: Your trusted guide in the digital realm. <br/>We help distinguish AI-generated content and validate the authenticity of your information<br/> Navigate with confidence with Masdar.</p>
-  <button class="button-glitch" role="button">CHECK AI</button>
+  <button class="button-glitch" role="button" onClick={  () =>{navigate('/signin');} }>CHECK AI</button>
   
   </p>
 
