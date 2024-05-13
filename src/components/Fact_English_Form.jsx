@@ -52,10 +52,14 @@ const Text_Form_Component = () => {
     console.log('Show Text submitted:', text);
 
     try {
-      const response = await axios.post('YOUR_API_ENDPOINT', { text });
+      const response = await axios.post('https://masdar-production.up.railway.app/predict/en', { text });
 
       console.log('Text uploaded successfully', response.data);
       set_Upload_Status('Text uploaded successfully');
+      set_Determination_Result("True");
+      var percentage = response.data.percentage * 100;
+      percentage = percentage.toFixed(2);
+      set_Percentage(percentage)
     } catch (error) {
       console.error('Error uploading text', error);
       set_Upload_Status('Error uploading text');
