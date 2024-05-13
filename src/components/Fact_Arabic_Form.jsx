@@ -1,8 +1,8 @@
-import './Main_Style.css';
+import "./Main_Style.css";
 import { useState } from 'react';
-import { Modal, Button, Form, Container, Row, Col } from 'react-bootstrap';
+import { Modal, Button, Form, Container, Row, Col,Stack } from 'react-bootstrap';
 import axios from 'axios';
-import Arabic_Result from "./Arabic_Result.jsx";
+
 
 const Fact_Arabic_Form = () => {
   const [show, set_Show] = useState(false);
@@ -10,6 +10,11 @@ const Fact_Arabic_Form = () => {
   const [upload_Status, set_Upload_Status] = useState(null); 
   const [show_Second_Modal, set_Show_Second_Modal] = useState(false);
   const [error_Visible, set_Error_Visible] = useState(false);  // New state for error visibility
+  const [Links, set_Links] = useState([]);
+  const [Cliam_Result, set_Cliam_Result] = useState('');
+  const [Determination_Result, set_Determination_Result] = useState('');
+  const [Explanation_Result, set_Explanation_Result] = useState('');
+  const [percentage, set_Percentage] = useState('');
   
   const Handle_Show = () => set_Show(true);
 
@@ -103,7 +108,23 @@ const Fact_Arabic_Form = () => {
               <Col xs={12} md={12}>
                 <Modal.Body className={"Result_Background_Color"} style={{padding:"1rem 0px"}}>
                   <h2 className="Title_Arabic_Result">النتائج </h2>
-                  <Arabic_Result/>
+                  <div style={{ width: "100%", textAlign: 'right', direction: "rtl" }}>
+      <Stack gap={3}>
+        <div id="scroll" style={{ maxHeight: "600px", overflowY: "auto", borderRadius: "5px", backgroundColor: "white", minHeight: "400px" }}>
+          <div className="p-2"><h5 style={{ display: "inline" }}>ادعاء: </h5>{Cliam_Result}</div>
+          <div className="p-2"><h5 style={{ display: "inline" }}>تحديد: </h5>{Determination_Result}</div>
+          <div className="p-2"><h5 style={{ display: "inline" }}>التفسير: </h5>{Explanation_Result}</div>
+          <div className="p-2"><h5 style={{ display: "inline" }}>النسبة: </h5>{percentage}%</div>
+          <div className="p-2"><h5>مصدر:</h5>
+            <ul style={{ listStyleType: "none" }}>
+              {Links.map(link => (
+                <li style={{ margin: "0% 0% 0% 6%" }} className="p-2" key={link.id}><a href={link.url}>{link.title}</a></li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </Stack>
+    </div>
                   <div style={{textAlign:"left"}}>
                     <Button className="Go_Back_Buttons D12" onClick={Handle_Close_Second_Modal} variant="dark">
                     ← رجوع

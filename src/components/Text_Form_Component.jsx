@@ -1,8 +1,8 @@
-import './Main_Style.css';
+import "./Main_Style.css";
 import { useState } from 'react';
-import { Modal, Button, Form, Container, Row, Col } from 'react-bootstrap';
+import { Modal, Button, Form, Container, Row, Col,Stack } from 'react-bootstrap';
 import axios from 'axios';
-import Result_Component from "./Result_Component.jsx";
+
 
 const Text_Form_Component = () => {
   const [show, set_Show] = useState(false);
@@ -10,6 +10,11 @@ const Text_Form_Component = () => {
   const [upload_Status, set_Upload_Status] = useState(null); 
   const [show_Second_Modal, set_Show_Second_Modal] = useState(false);
   const [error_Visible, set_Error_Visible] = useState(false);  // New state for error visibility
+  const [percentage, set_Percentage] = useState('');
+  const [contentType, setContentType] = useState('');
+  const [SubmitHistory, setSubmitHistory] = useState('');
+
+ 
   
   const Handle_Show = () => set_Show(true);
 
@@ -43,21 +48,17 @@ const Text_Form_Component = () => {
     }
   };
 
-    const handleFormSubmit = async (event) => {
-    event.preventDefault();
+  const Handle_Form_Submit = async (Event) => {
+    Event.preventDefault();
     console.log('Show Text submitted:', text);
 
     try {
-      const Response = await axios.post('https://masdar2-production.up.railway.app/ai/text', { text });
-      set_Text("Text: " + text)
-      console.log('Text uploaded successfully', Response.data);
+      const response = await axios.post('YOUR_API_ENDPOINT', { text });
+
+      console.log('Text uploaded successfully', response.data);
       set_Upload_Status('Text uploaded successfully');
-      var percentage = Response.data.score * 100;
-      percentage = percentage.toFixed(2);
-      console.log(percentage)
-      Submit_Form()
-    } catch (Error) {
-      console.error('Error uploading text', Error);
+    } catch (error) {
+      console.error('Error uploading text', error);
       set_Upload_Status('Error uploading text');
     }
   };
@@ -77,7 +78,7 @@ const Text_Form_Component = () => {
         </Modal.Header>
 
         <Modal.Body className="Modal_Body" style={{paddingBottom: "30px", maxHeight: "520px"}}>
-          <form onSubmit={handleFormSubmit}>
+          <form onSubmit={Handle_Form_Submit}>
             <Form.Control className="custom-textarea" as="textarea" value={text} onChange={Handle_Text_Change} placeholder="Type your text here..." style={{ height: '200px', border: "none" }} />
             {error_Visible && (
               <div id="showMe" className='Text_Message_Error'>
@@ -88,7 +89,7 @@ const Text_Form_Component = () => {
             )}
             {text && !error_Visible ? (
               <div style={{ textAlign: "center" }}>                                         
-                <Button variant="dark" className={"D12 D11"} type="submit" centered>Submit</Button>
+                <Button variant="dark" className={"D12 D11"} type="submit" onClick={Submit_Form} centered>Submit</Button>
               </div>
             ) : (
               <div style={{ textAlign: "center" }}>
@@ -107,7 +108,28 @@ const Text_Form_Component = () => {
               <Col xs={12} md={12}>
                 <Modal.Body className={"Result_Background_Color"} style={{padding:"1rem 0px"}}>
                   <h2  className="Title_Result" >Results</h2>
-                  <Result_Component/>
+                  <div style={{ width: "100%" }}>  
+      <Stack gap={3}>
+        <div id="scroll" style={{ maxHeight: "600px", overflowY: "auto", borderRadius: "5px", backgroundColor: "white", minHeight: "400px" }}>
+          <h1 style={{ textAlign: "center", marginTop: "70px",fontSize:"50px" }}>AI Detector</h1>
+          <p style={{ textAlign: "center", marginTop: "15px" }}>
+            This is the approximate amount of ai modification included in the content provided
+          </p>
+          <Container style={{ marginTop: "100px" }}>
+            <Row>
+              <Col style={{ textAlign: "center" }}><h5 style={{fontSize:"30px"}}>{percentage}%</h5></Col>
+              <Col style={{ textAlign: "center" }}><h5 style={{fontSize:"30px"}}>{contentType}</h5></Col>
+              <Col style={{ textAlign: "center" }}><h5 style={{fontSize:"30px"}}>{SubmitHistory}</h5></Col>
+            </Row>
+            <Row>
+              <Col style={{ textAlign: "center" }}>AI</Col>
+              <Col style={{ textAlign: "center" }}>Content Type</Col>
+              <Col style={{ textAlign: "center" }}>Submit Date</Col>
+            </Row>
+          </Container>
+        </div>
+      </Stack>
+    </div>
                   <div style={{textAlign:"right"}}>
                     <Button className="Go_Back_Buttons D12" onClick={Handle_Close_Second_Modal} variant="dark">
                       ← Go Back
@@ -122,5 +144,4 @@ const Text_Form_Component = () => {
     </>
   );
 }
-
 export default Text_Form_Component;

@@ -1,8 +1,7 @@
-import './Main_Style.css';
+import "./Main_Style.css";
 import { useState } from 'react';
-import { Modal, Button, Form, Container, Row, Col } from 'react-bootstrap';
+import { Modal, Button, Form, Container, Row, Col,Stack } from 'react-bootstrap';
 import axios from 'axios';
-import English_Result from "./English_Result.jsx";
 
 const Text_Form_Component = () => {
   const [show, set_Show] = useState(false);
@@ -10,6 +9,11 @@ const Text_Form_Component = () => {
   const [upload_Status, set_Upload_Status] = useState(null); 
   const [show_Second_Modal, set_Show_Second_Modal] = useState(false);
   const [error_Visible, set_Error_Visible] = useState(false);  // New state for error visibility
+  const [Links, set_Links] = useState([]);
+  const [Cliam_Result, set_Cliam_Result] = useState('');
+  const [Determination_Result, set_Determination_Result] = useState('');
+  const [Explanation_Result, set_Explanation_Result] = useState('');
+  const [percentage, set_Percentage] = useState('');
   
   const Handle_Show = () => set_Show(true);
 
@@ -103,7 +107,23 @@ const Text_Form_Component = () => {
               <Col xs={12} md={12}>
                 <Modal.Body className={"Result_Background_Color"} style={{padding:"1rem 0px"}}>
                   <h2 className="Title_Result">Results</h2>
-                  <English_Result />
+                  <div style={{width:"0% 100%"}}>
+                  <Stack  gap={3}>
+                    <div id="scroll" style={{ maxHeight: "600px", overflowY: "auto",borderRadius: "5px",backgroundColor:"white",minHeight: "400px" }}>
+                      <div className="p-2"><h5 style={{ display: "inline" }}>Cliam: </h5>{Cliam_Result}</div>
+                      <div className="p-2"><h5 style={{ display: "inline" }}>Determination: </h5>{Determination_Result}</div>
+                      <div className="p-2"><h5 style={{ display: "inline" }}>Explanation: </h5>{Explanation_Result}</div>
+                      <div className="p-2"><h5 style={{ display: "inline" }}>Percentage: </h5>{percentage}%</div>
+                        <div className="p-2"><h5 >Source:</h5>
+                      <ul style={{ listStyleType: "none"}}>
+                          {Links.map(Link => (
+                              <li style={{margin:"0% 0% 0% 6%"}} className="p-2" key={Link.id} ><a href={Link.url}>{Link.title}</a></li>
+                        ))}
+                      </ul>
+                        </div>
+                    </div>
+                  </Stack>
+    </div>
                   <div style={{textAlign:"right"}}>
                     <Button className="Go_Back_Buttons D12" onClick={Handle_Close_Second_Modal} variant="dark">
                       ← Go Back

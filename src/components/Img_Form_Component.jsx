@@ -1,8 +1,7 @@
-import './Main_Style.css';
+import "./Main_Style.css";
 import { useState } from 'react';
-import { Modal, Button,Container,Col,Row } from 'react-bootstrap';
+import { Modal, Button,Container,Col,Row,Stack } from 'react-bootstrap';
 import axios from 'axios';
-import Result_Component from "./Result_Component.jsx"
 
 const Image_Form_Component = () => {
   const [show, set_Show] = useState(false);
@@ -11,12 +10,15 @@ const Image_Form_Component = () => {
   const [image_Preview, set_Image_Preview] = useState(null);
   const [is_Hovered, set_Is_Hovered] = useState(false);
   const [show_Second_Modal, set_Show_Second_Modal] = useState(false);
+  const [percentage, set_Percentage] = useState('');
+  const [contentType, setContentType] = useState('');
+  const [SubmitHistory, setSubmitHistory] = useState('');
 
   const Handle_Show = () => set_Show(true);
 
   const Handle_Close_Second_Modal = () =>{
     set_Image(null);
-     set_Show_Second_Modal(false);
+    set_Show_Second_Modal(false);
   }
      
   const Handle_Close = () => {
@@ -46,7 +48,7 @@ const Image_Form_Component = () => {
     }
   };
 
-  const Handle_Remove_Image = () => {
+  const Handle_Remove_Image = () => { 
     set_Image(null);
     set_Image_Preview(null);
   };
@@ -189,7 +191,28 @@ const Image_Form_Component = () => {
             <Modal.Body className={"Result_Background_Color"} style={{padding:"1rem 0px"}}>
         
           <h2 className="Title_Result">Results</h2>
-          <Result_Component/>
+          <div style={{ width: "100%" }}>  
+      <Stack gap={3}>
+        <div id="scroll" style={{ maxHeight: "600px", overflowY: "auto", borderRadius: "5px", backgroundColor: "white", minHeight: "400px" }}>
+          <h1 style={{ textAlign: "center", marginTop: "70px",fontSize:"50px" }}>AI Detector</h1>
+          <p style={{ textAlign: "center", marginTop: "15px" }}>
+            This is the approximate amount of ai modification included in the content provided
+          </p>
+          <Container style={{ marginTop: "100px" }}>
+            <Row>
+              <Col style={{ textAlign: "center" }}><h5 style={{fontSize:"30px"}}>{percentage}%</h5></Col>
+              <Col style={{ textAlign: "center" }}><h5 style={{fontSize:"30px"}}>{contentType}</h5></Col>
+              <Col style={{ textAlign: "center" }}><h5 style={{fontSize:"30px"}}>{SubmitHistory}</h5></Col>
+            </Row>
+            <Row>
+              <Col style={{ textAlign: "center" }}>AI</Col>
+              <Col style={{ textAlign: "center" }}>Content Type</Col>
+              <Col style={{ textAlign: "center" }}>Submit Date</Col>
+            </Row>
+          </Container>
+        </div>
+      </Stack>
+    </div>
           <div  style={{textAlign:"right"}}>
           <Button className={"Go_Back_Buttons D12"} onClick={Handle_Close_Second_Modal} variant="dark" >
               ← Go Back
