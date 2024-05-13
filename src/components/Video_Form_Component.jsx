@@ -69,7 +69,7 @@ const Video_Form_Component = () => {
 
       console.log('Video uploaded successfully', Response.data);
       set_Upload_Status('Video uploaded successfully');
-      var percentage = response.data.percentage * 100;
+      var percentage = Response.data.percentage * 100;
       percentage = percentage.toFixed(2);
       set_Percentage(percentage)
       setContentType("Video")
@@ -174,7 +174,7 @@ const Video_Form_Component = () => {
             
             {video_Preview ? (
             <div style={{ textAlign: "center" }}>
-              <Button className={"D12 D11"} variant="dark"  type="submit" onClick={Submit_Form} centered>Submit</Button>
+              <Button className={"D12 D11"} variant="dark"  type="submit" centered>Submit</Button>
               </div>) : (<div style={{ textAlign: "center" }}>
                 <Button disabled className={"D11"} variant="dark" type="submit">Submit</Button>
                 </div>)}
