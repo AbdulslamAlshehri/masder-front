@@ -84,7 +84,7 @@ function Sign_up(){
          //here call the backend to send the user confirmation code ax                                                                                 
                                                                                                         
           
-      const { Name: name, email, password, confirmPassword } = formData; //to match the "name" field in the backend
+      const { name: name, email, password, confirmPassword } = formData; //to match the "name" field in the backend
 
    //هنا نشوف اذا فيه قيمه بتنرسل للباك اند ولا لا      //user information will be sent as an object! مهم!!!!
  // so if you want to access the email you type formData.Email                            
@@ -170,7 +170,7 @@ navigate('/Signin');
   className="mb-3"
   id="Name"
 >
-  <Form.Control name="Name" placeholder="" onChange={handleChange} value={formData.Name}/>
+  <Form.Control name="Name" placeholder="" onChange={handleChange} value={formData.name}/>
 </FloatingLabel>
         {errors.Name && <div className="error">{errors.Name}</div>}
         <FloatingLabel 
