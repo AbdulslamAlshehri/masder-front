@@ -47,25 +47,31 @@ const Text_Form_Component = () => {
     }
   };
 
-  const handleFormSubmit = async (Event) => {
+   const handleFormSubmit = async (Event) => {
     Event.preventDefault();
     console.log('Show Text submitted:', text);
 
     try {
-      const response = await axios.post('https://masdar-production.up.railway.app/predict/en', { text });
+      const response = await axios.post('https://masdar-production.up.railway.app/predict/ar', { text });
 
       console.log('Text uploaded successfully', response.data);
       set_Upload_Status('Text uploaded successfully');
-      set_Determination_Result("True");
-      var percentage = response.data.percentage * 100;
+      var percentage = response.data.prediction * 100;
       percentage = percentage.toFixed(2);
-      set_Percentage(percentage)
-      Submit_Form()
+      if(percentage > 60){
+      set_Determination_Result("Fake");
+      set_Percentage(percentage)}
+      else{
+        percentage = 100 - percentage
+        set_Determination_Result("True");
+        set_Percentage(percentage)}
+      
+      Submit_Form();
     } catch (error) {
       console.error('Error uploading text', error);
       set_Upload_Status('Error uploading text');
     }
-  };
+}
 
   return (
     <>
@@ -115,11 +121,8 @@ const Text_Form_Component = () => {
                   <div style={{width:"0% 100%"}}>
                   <Stack  gap={3}>
                     <div id="scroll" style={{ maxHeight: "600px", overflowY: "auto",borderRadius: "5px",backgroundColor:"white",minHeight: "400px" }}>
-                      <div className="p-2"><h5 style={{ display: "inline" }}>Cliam: </h5>{Cliam_Result}</div>
                       <div className="p-2"><h5 style={{ display: "inline" }}>Determination: </h5>{Determination_Result}</div>
-                      <div className="p-2"><h5 style={{ display: "inline" }}>Explanation: </h5>{Explanation_Result}</div>
                       <div className="p-2"><h5 style={{ display: "inline" }}>Percentage: </h5>{percentage}%</div>
-                        <div className="p-2"><h5 >Source:</h5>
                       <ul style={{ listStyleType: "none"}}>
                           {Links.map(Link => (
                               <li style={{margin:"0% 0% 0% 6%"}} className="p-2" key={Link.id} ><a href={Link.url}>{Link.title}</a></li>
