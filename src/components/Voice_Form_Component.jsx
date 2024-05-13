@@ -61,7 +61,7 @@ const Voice_Form_Component = () => {
     Form_Data.append('voice', voice);
 
     try {
-      const Response = await axios.post('YOUR_VOICE_API_ENDPOINT', Form_Data, {
+      const Response = await axios.post('https://masdar2-production.up.railway.app/ai/audio', Form_Data, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -69,6 +69,11 @@ const Voice_Form_Component = () => {
 
       console.log('Voice uploaded successfully', Response.data);
       set_Upload_Status('Voice uploaded successfully');
+      var percentage = Response.data.score * 100;
+      percentage = percentage.toFixed(2);
+      set_Percentage(percentage)
+      setContentType("Text")
+      Submit_Form()
     } catch (Error) {
       console.Error('Error uploading voice', Error);
       set_Upload_Status('Error uploading voice');
@@ -169,7 +174,7 @@ const Voice_Form_Component = () => {
               )}
             
             {voice_Preview ? (<div style={{ textAlign: "center" }}>
-              <Button className={"D12 D11"} variant="dark" onClick={Submit_Form} type="submit" centered>Submit</Button>
+              <Button className={"D12 D11"} variant="dark" type="submit" centered>Submit</Button>
               </div>) : (<div style={{ textAlign: "center" }}>
                 <Button disabled className={"D11"} variant="dark" type="submit">Submit</Button>
                 </div>)}
