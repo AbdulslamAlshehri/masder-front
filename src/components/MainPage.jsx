@@ -24,6 +24,7 @@ const MainPage = () => {
   };
 
   return (
+    <>
      <Header_2/>
     <div className="BG" style={{marginTop:"100px"}}>
 
@@ -54,7 +55,7 @@ const MainPage = () => {
 
       </div>
     </div>
-  
+  </>
   )
 }
 export default MainPage;
