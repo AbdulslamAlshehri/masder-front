@@ -123,15 +123,10 @@ const Text_Form_Component = () => {
                     <div id="scroll" style={{ maxHeight: "600px", overflowY: "auto",borderRadius: "5px",backgroundColor:"white",minHeight: "400px" }}>
                       <div className="p-2"><h5 style={{ display: "inline" }}>Determination: </h5>{Determination_Result}</div>
                       <div className="p-2"><h5 style={{ display: "inline" }}>Percentage: </h5>{percentage}%</div>
-                      <ul style={{ listStyleType: "none"}}>
-                          {Links.map(Link => (
-                              <li style={{margin:"0% 0% 0% 6%"}} className="p-2" key={Link.id} ><a href={Link.url}>{Link.title}</a></li>
-                        ))}
-                      </ul>
                         </div>
-                    </div>
+                    
                   </Stack>
-    </div>
+                    </div>
                   <div style={{textAlign:"right"}}>
                     <Button className="Go_Back_Buttons D12" onClick={Handle_Close_Second_Modal} variant="dark">
                       ← Go Back
