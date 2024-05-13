@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 function Sign_up(){
   const navigate = useNavigate();
  const [formData, setFormData] = useState({
-    name: "",
+    Name: "",
     email: "",
     password: "",
     confirmPassword: ""
@@ -23,7 +23,7 @@ function Sign_up(){
   const [BEerror, setBEerror] = useState(false);
 
   const validationSchema = Yup.object({
-    name: Yup.string().required("-Name is Required"),
+    Name: Yup.string().required("-Name is Required"),
     email: Yup.string()
       .required("-Email is Required")
       .email("-Invalid email format"),
@@ -84,12 +84,12 @@ function Sign_up(){
          //here call the backend to send the user confirmation code ax                                                                                 
                                                                                                         
           
-      const { name: name, email, password, confirmPassword } = formData; //to match the "name" field in the backend
+      const { Name: name, email, password, confirmPassword } = formData; //to match the "name" field in the backend
 
    //هنا نشوف اذا فيه قيمه بتنرسل للباك اند ولا لا      //user information will be sent as an object! مهم!!!!
  // so if you want to access the email you type formData.Email                            
 // so Email=formData.Email and password=formData.password and name= formData.Name:
-         axios.post('https://masdar2-production.up.railway.app/api/users', { name, email, password })                                      //نرسل معلومات حسابه الجديد للباك اند
+         axios.post('http://localhost:5000/api/users', { name, email, password })                                      //نرسل معلومات حسابه الجديد للباك اند
          .then(response => {
            console.log(response);                                                    //ونرسل كود لايميله عشان نتاكد انه صدق حقه
            // Check the response data from the backend
@@ -122,7 +122,7 @@ function Sign_up(){
          const confirmationCode = e.target.elements.confirmationCode.value;
          console.log('Sending the confirmation code to the backend:', { userId: userId2, confirmationCode});          //هنا نشوف اذا فيه قيمه بتنرسل للباك اند ولا لا  
         //put the endpoints inside ('/your-endpoint')   مهم!!!
-         axios.post('https://masdar2-production.up.railway.app/api/users/verifyOTP',  { userId: userId2, otp: confirmationCode })
+         axios.post('http://localhost:5000/api/users/verifyOTP',  { userId: userId2, otp: confirmationCode })
          .then(response => {
           if (response.data.success === true) {                                                     //اذا الكود اللي دخله نفس اللي ارسلناه لايميله ترجع ترو 
          console.log('account created succefully');                               
@@ -168,11 +168,11 @@ navigate('/Signin');
   controlId="floatingInput"
   label="Name"
   className="mb-3"
-  id="name"
+  id="Name"
 >
-  <Form.Control name="name" placeholder="" onChange={handleChange} value={formData.name}/>
+  <Form.Control name="Name" placeholder="" onChange={handleChange} value={formData.Name}/>
 </FloatingLabel>
-        {errors.name && <div className="error">{errors.name}</div>}
+        {errors.Name && <div className="error">{errors.Name}</div>}
         <FloatingLabel 
   controlId="floatingInput2"
   label="Email address"
