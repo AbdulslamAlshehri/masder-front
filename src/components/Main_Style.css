@@ -1,4 +1,10 @@
 /* white whole */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;900&display=swap');
+
+
+* {
+font-family: 'Manrope', serif;
+}
 .Form_Style{
   display: flex;
   flex-direction: column;
