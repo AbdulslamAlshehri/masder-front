@@ -130,7 +130,6 @@ const Handle_Form_Submit = async (Event) => {
             <Row>
               <Col style={{ textAlign: "center" }}>AI</Col>
               <Col style={{ textAlign: "center" }}>Content Type</Col>
-              <Col style={{ textAlign: "center" }}>Submit Date</Col>
             </Row>
           </Container>
         </div>
