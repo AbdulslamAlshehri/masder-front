@@ -59,7 +59,7 @@ const Video_Form_Component = () => {
     Form_Data.append('video', video);
 
     try {
-      const Response = await axios.post('YOUR_VIDEO_API_ENDPOINT', Form_Data, {
+      const Response = await axios.post('https://masdar2-production.up.railway.app/ai/video', Form_Data, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -67,6 +67,7 @@ const Video_Form_Component = () => {
 
       console.log('Video uploaded successfully', Response.data);
       set_Upload_Status('Video uploaded successfully');
+      Submit_Form();
     } catch (Error) {
       console.Error('Error uploading video', Error);
       set_Upload_Status('Error uploading video');
@@ -167,7 +168,7 @@ const Video_Form_Component = () => {
             
             {video_Preview ? (
             <div style={{ textAlign: "center" }}>
-              <Button className={"D12 D11"} variant="dark"  type="submit" onClick={Submit_Form} centered>Submit</Button>
+              <Button className={"D12 D11"} variant="dark"  type="submit" centered>Submit</Button>
               </div>) : (<div style={{ textAlign: "center" }}>
                 <Button disabled className={"D11"} variant="dark" type="submit">Submit</Button>
                 </div>)}
