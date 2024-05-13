@@ -89,7 +89,7 @@ function Sign_up(){
    //هنا نشوف اذا فيه قيمه بتنرسل للباك اند ولا لا      //user information will be sent as an object! مهم!!!!
  // so if you want to access the email you type formData.Email                            
 // so Email=formData.Email and password=formData.password and name= formData.Name:
-         axios.post('http://localhost:5000/api/users', { name, email, password })                                      //نرسل معلومات حسابه الجديد للباك اند
+         axios.post('https://masdar2-production.up.railway.app/api/users', { name, email, password })                                      //نرسل معلومات حسابه الجديد للباك اند
          .then(response => {
            console.log(response);                                                    //ونرسل كود لايميله عشان نتاكد انه صدق حقه
            // Check the response data from the backend
