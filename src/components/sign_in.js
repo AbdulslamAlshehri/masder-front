@@ -53,7 +53,7 @@ function Sign_in(){
 console.log('Sending this data to the backend:', email, passwords);                                 //هنا نشوف اذا فيه قيمه بتنرسل للباك اند ولا لا
   // Make a POST request to the backend with the email and password after the user logs in
    //put the endpoints inside ('/your-endpoint')   مهم!!!
-  axios.post('http://localhost:5000/api/users/login', {                                                            //نتاكد ان الايميل والباسوورد صح وموجوده في الداتا بيس
+  axios.post('https://masdar2-production.up.railway.app/api/users/login', {                                                            //نتاكد ان الايميل والباسوورد صح وموجوده في الداتا بيس
   email,
   password: passwords
 
@@ -91,7 +91,7 @@ console.log('Sending this data to the backend:', email, passwords);             
     const email = e.target.elements.floatingEmailForgot.value;
     console.log('Sending this email to the backend:', email);       //هنا نشوف اذا فيه قيمه بتنرسل للباك اند ولا لا
  //put the endpoints inside ('/your-endpoint')   مهم!!!
-    axios.post('http://localhost:5000/api/users/requestPasswordReset', {                                       //هنا يرسل ايميله للباك اند (forgot password)             
+    axios.post('https://masdar2-production.up.railway.app/api/users/requestPasswordReset', {                                       //هنا يرسل ايميله للباك اند (forgot password)             
       email                                                                 //نتاكد ان الايميل موجود في الداتا بيس  
     })
     .then(response => {
@@ -120,7 +120,7 @@ console.log('Sending this data to the backend:', email, passwords);             
     //here check for the submitted confirmation code if correct inform the user the password has changed if not inform the user its not correct
 
 //put the endpoints inside ('/your-endpoint')   مهم!!!
-    axios.post('http://localhost:5000/api/users/verifyString', {                                       // نرسل الكود اللي دخله اليوزر للباك اند
+    axios.post('https://masdar2-production.up.railway.app/api/users/verifyString', {                                       // نرسل الكود اللي دخله اليوزر للباك اند
     userId: userId, 
     ResetString: confirmationCode                                                                                                                              
     })
@@ -160,7 +160,7 @@ console.log('Sending this data to the backend:', email, passwords);             
 
    //axios to save new password 
     //put the endpoints inside ('/your-endpoint')   مهم!!!
-   axios.post('http://localhost:5000/api/users/resetPassword', {
+   axios.post('https://masdar2-production.up.railway.app/api/users/resetPassword', {
     userId,
    newPassword: password                               // هنا الرمز الجديد (forgot password)
   })
