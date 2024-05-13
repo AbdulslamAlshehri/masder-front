@@ -49,13 +49,12 @@ const Text_Form_Component = () => {
 
     try {
       const Response = await axios.post('https://masdar2-production.up.railway.app/ai/text', { text });
-      set_Provided_content("Text: " + text)
+      set_Text("Text: " + text)
       console.log('Text uploaded successfully', Response.data);
       set_Upload_Status('Text uploaded successfully');
       var percentage = Response.data.score * 100;
       percentage = percentage.toFixed(2);
       console.log(percentage)
-      set_Cliam_Result(percentage + " is AI")
       Submit_Form()
     } catch (Error) {
       console.error('Error uploading text', Error);
