@@ -63,7 +63,7 @@ const Fact_Arabic_Form = () => {
       set_Determination_Result("خبر صحيح");
       set_Percentage(percentage)}
       else{
-        percentage = percentage % 100
+        percentage = 100 - percentage
         set_Determination_Result("خبر زائف");
         set_Percentage(percentage)}
       
