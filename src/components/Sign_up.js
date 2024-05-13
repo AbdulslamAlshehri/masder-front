@@ -84,19 +84,22 @@ function Sign_up(){
          //here call the backend to send the user confirmation code ax                                                                                 
                                                                                                         
           
+      const { Name: name, email, password, confirmPassword } = formData; //to match the "name" field in the backend
 
    //هنا نشوف اذا فيه قيمه بتنرسل للباك اند ولا لا      //user information will be sent as an object! مهم!!!!
  // so if you want to access the email you type formData.Email                            
 // so Email=formData.Email and password=formData.password and name= formData.Name:
-         axios.post('/endpoints', formData)                                      //نرسل معلومات حسابه الجديد للباك اند
+         axios.post('http://localhost:5000/api/users', { name, email, password })                                      //نرسل معلومات حسابه الجديد للباك اند
          .then(response => {
            console.log(response);                                                    //ونرسل كود لايميله عشان نتاكد انه صدق حقه
            // Check the response data from the backend
-           if (response.data === true) {                                                             //اذا ارسلت الكود لايميله ترجع ترو
+           if (response.data.success === true) {                                                             //اذا ارسلت الكود لايميله ترجع ترو
              // If the backend sends true, do something                              
              console.log('confirmation code sent succefully');
              setShowDialog(true);
-           } else if (response.data === false) {                                                     //اذا ما انرسل الكود لايميله لاي سبب من الاسباب ترجع فولس
+             localStorage.setItem('userId', response.data._id);
+             localStorage.setItem('token', response.data.token);
+           } else if (response.data.success === false) {                                                     //اذا ما انرسل الكود لايميله لاي سبب من الاسباب ترجع فولس
              // If the backend sends false, do something else
              console.log('there was a problem sending the confirmation code');
              setBEerror(true);
@@ -109,23 +112,24 @@ function Sign_up(){
          });
 
   };
-
+  const userId2 = localStorage.getItem('userId');
+  const toke2 = localStorage.getItem('token');
                                            //2
   const  handleSubmitConfirmation = (e)=> {                 // هنا نرسل الكود للباك اند ونتاكد اذا هو نفس اللي ارسلناه لايميله ولا لا
     e.preventDefault();
          //here check for the submitted confirmation code 
     
          const confirmationCode = e.target.elements.confirmationCode.value;
-         console.log('Sending the confirmation code to the backend:', confirmationCode);          //هنا نشوف اذا فيه قيمه بتنرسل للباك اند ولا لا  
+         console.log('Sending the confirmation code to the backend:', { userId: userId2, confirmationCode});          //هنا نشوف اذا فيه قيمه بتنرسل للباك اند ولا لا  
         //put the endpoints inside ('/your-endpoint')   مهم!!!
-         axios.post('/your-endpoint', confirmationCode)
+         axios.post('http://localhost:5000/api/users/verifyOTP',  { userId: userId2, otp: confirmationCode })
          .then(response => {
-          if (response.data === true) {                                                     //اذا الكود اللي دخله نفس اللي ارسلناه لايميله ترجع ترو 
+          if (response.data.success === true) {                                                     //اذا الكود اللي دخله نفس اللي ارسلناه لايميله ترجع ترو 
          console.log('account created succefully');                               
          setShowDialog(false) ;
 setSuccessfull(true);
 navigate('/Signin');
-       } else if (response.data === false) {                                                          // اذا مب نفسه ترجع فولس
+       } else if (response.data.success === false) {                                                          // اذا مب نفسه ترجع فولس
          console.log('there was a problem creating you account');
          setconfirmationCodeError(true);
        }
@@ -153,7 +157,7 @@ navigate('/Signin');
      <div className='backgroundimage'>
       <Header_1/>
   
-      <p className='middle'>
+      <div className='middle'>
       
     
       <div id="login-form">
@@ -170,7 +174,7 @@ navigate('/Signin');
 </FloatingLabel>
         {errors.Name && <div className="error">{errors.Name}</div>}
         <FloatingLabel 
-  controlId="floatingInput"
+  controlId="floatingInput2"
   label="Email address"
   className="mb-3"
 >
@@ -275,7 +279,7 @@ navigate('/Signin');
 
 
 
-</p>
+</div>
     <Footer_1/>
     </div>
     </>

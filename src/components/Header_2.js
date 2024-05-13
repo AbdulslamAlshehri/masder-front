@@ -31,8 +31,9 @@ import axios from "axios";
   const handleConfirmClick = () => {
 
     console.log('Logging out'); 
-                                  
-    
+             
+    localStorage.removeItem('token');
+
     //هنا كود اللوق اوت ينحط    // Add your logout logic here
 
     navigate('/Homepage');  //هذا يوديه للهوم بيج
@@ -43,10 +44,16 @@ import axios from "axios";
      useEffect(() => {
 
     
+      const token = localStorage.getItem('token');
 
-  axios.get('backend endpoints')   //you do axios post to return the user's name from the backend     // هنا ترجع الاسم من الباك اند
+  axios.get('http://localhost:5000/api/users/me',{
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+    
+  })   //you do axios post to return the user's name from the backend     // هنا ترجع الاسم من الباك اند
     .then(response => {
-      const username = response.data; // adjust this line based on your backend response                //response.data is the user's name 
+      const username = response.data.name; // adjust this line based on your backend response                //response.data is the user's name 
       setTitle(username);
     })
     .catch(error => {

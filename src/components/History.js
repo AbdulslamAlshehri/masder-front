@@ -10,15 +10,23 @@ function History() {
   const [error, seterror] = useState(false);
   useEffect(() => {
 
-
+  // Get the token from local storage 
+  const token = localStorage.getItem('token');
 
 
   ///////////////////////////////////////////////////////////////////////////////////////////ما فيه شي فوق ///////////////////////////////////////////////////////////////////////////////////
 
 
-    axios.get('your-api-url')          //endpoints 
+    axios.get('http://localhost:5000/api/history/all/',{    //endpoints 
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })      
       .then(response => {
-        setHistory(response.data);
+      const combinedHistory = [...response.data.checkAIValidity, ...response.data.truthinessDetector];
+      setHistory(combinedHistory);
+
+        //setHistory(response.data);
       })
       .catch(error => {
         console.error('There was an error!', error);
@@ -52,11 +60,11 @@ function History() {
             <tbody>
               {history.map((item, index) => (
                 <tr key={index}>
-                  <td>{item.name}</td>
-                  <td>{item.AIorFact}</td>
+                  <td>{item.data.Name}</td>
                   <td>{item.type}</td>
-                  <td>{item.accuracy}</td>
-                  <td>{item.result}</td>
+                  <td>{item.data.InputType}</td>
+                  <td>{item.data.Accuracy}</td>
+                  <td>{item.data.Response}</td>
                 </tr>
               ))}
             </tbody>

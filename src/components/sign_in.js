@@ -53,25 +53,26 @@ function Sign_in(){
 console.log('Sending this data to the backend:', email, passwords);                                 //هنا نشوف اذا فيه قيمه بتنرسل للباك اند ولا لا
   // Make a POST request to the backend with the email and password after the user logs in
    //put the endpoints inside ('/your-endpoint')   مهم!!!
-  axios.post('/your-endpoint', {                                                            //نتاكد ان الايميل والباسوورد صح وموجوده في الداتا بيس
-    email,
-    passwords
+  axios.post('http://localhost:5000/api/users/login', {                                                            //نتاكد ان الايميل والباسوورد صح وموجوده في الداتا بيس
+  email,
+  password: passwords
 
   })
   .then(response => {                        
            
-    if (response.data === true) {
+    if (response.data.success === true) {
       // If the backend returns true, the login was successful                              //اذا صح وموجوده ترجع ترو      
       console.log('Login successful');
-    //navigate('/MainPage'); //رجعها
-    } else if(response.data === false){
+    navigate('/testingpage');
+    localStorage.setItem('userId', response.data._id);
+    localStorage.setItem('token', response.data.token);
+    } else if(response.data.success === false){
       // If the backend returns false, the login failed                                    //اذا لا ترجع فولس
       setWrongEmailOrPassword(true)
       console.log('Login failed');
     }
   })
   .catch(error => {
-      navigate('/MainPage'); //شلها
     console.error(error);
     setproblem(true);
   });
@@ -79,7 +80,8 @@ console.log('Sending this data to the backend:', email, passwords);             
   };
 
 
-
+  const userId = localStorage.getItem('userId');
+  const token = localStorage.getItem('token');
   const HandleEmailSubmit = (e) => {      //هنا اذا نسى اليوزر حسابه نطلب ايميله ونرسله للباك اند(forgot password)      1
     e.preventDefault();
 
@@ -89,15 +91,15 @@ console.log('Sending this data to the backend:', email, passwords);             
     const email = e.target.elements.floatingEmailForgot.value;
     console.log('Sending this email to the backend:', email);       //هنا نشوف اذا فيه قيمه بتنرسل للباك اند ولا لا
  //put the endpoints inside ('/your-endpoint')   مهم!!!
-    axios.post('/your-endpoint', {                                       //هنا يرسل ايميله للباك اند (forgot password)             
+    axios.post('http://localhost:5000/api/users/requestPasswordReset', {                                       //هنا يرسل ايميله للباك اند (forgot password)             
       email                                                                 //نتاكد ان الايميل موجود في الداتا بيس  
     })
     .then(response => {
-      if (response.data === true) {                                                        //اذا صح وموجود ترجع ترو 
+      if (response.data.success === true) {                                                        //اذا صح وموجود ترجع ترو 
         console.log('Email exists in the database');                       
         setShowDialog(false);
         setShowConfirmation(true);                                             
-      } else if (response.data === false) {
+      } else if (response.data.success === false) {
         console.log('Email does not exist in the database');                                   //اذا لا ترجع فولس
         setEmailConfirmationError(true);
       }
@@ -114,20 +116,21 @@ console.log('Sending this data to the backend:', email, passwords);             
     e.preventDefault();                                         // هنا نرسل الكود للباك اند ونتاكد اذا هو نفس اللي ارسلناه لايميله ولا لا
     const confirmationCode = e.target.elements.floatingConfirmationCode.value;
 
-    console.log('Sending this cofrimartion code to the backend:', confirmationCode);   //هنا نشوف اذا فيه قيمه بتنرسل للباك اند ولا لا
+    console.log('Sending this cofrimartion code to the backend:', confirmationCode, userId);   //هنا نشوف اذا فيه قيمه بتنرسل للباك اند ولا لا
     //here check for the submitted confirmation code if correct inform the user the password has changed if not inform the user its not correct
 
 //put the endpoints inside ('/your-endpoint')   مهم!!!
-    axios.post('/your-endpoint', {                                       // نرسل الكود اللي دخله اليوزر للباك اند
-      confirmationCode                                                                                                                              
+    axios.post('http://localhost:5000/api/users/verifyString', {                                       // نرسل الكود اللي دخله اليوزر للباك اند
+    userId: userId, 
+    ResetString: confirmationCode                                                                                                                              
     })
     .then(response => {
-      if (response.data === true) {
+      if (response.data.success === true) {
         console.log('Confirmation code is correct');              //اذا الكود اللي دخله نفس اللي ارسلناه لايميله ترجع ترو 
         setShowConfirmation(false);
         setShowNewPassword(true);
    
-      } else if (response.data === false) {
+      } else if (response.data.success === false) {
         console.log('Confirmation code is incorrect');                    // اذا مب نفسه ترجع فولس
         setconfirmationCodeError(true);
     
@@ -146,7 +149,7 @@ console.log('Sending this data to the backend:', email, passwords);             
    const HandleNewPasswordSubmit = async (e) => {          //  هنا نرسل الرمز الجديد (forgot password)                              3
      e.preventDefault();
      const password =  formData.password;
-     console.log('Sending this email to the backend:', password);       //هنا نشوف اذا فيه قيمه بتنرسل للباك اند ولا لا
+     console.log('Sending this email to the backend:', userId, password);       //هنا نشوف اذا فيه قيمه بتنرسل للباك اند ولا لا
 
      try {
       await validationSchema.validate(formData, {abortEarly: false});
@@ -154,17 +157,19 @@ console.log('Sending this data to the backend:', email, passwords);             
       // So, clear any previous errors.
       setErrors({});
   
+
    //axios to save new password 
     //put the endpoints inside ('/your-endpoint')   مهم!!!
-   axios.post('/your-endpoint', {password                                 // هنا الرمز الجديد (forgot password)
-    
+   axios.post('http://localhost:5000/api/users/resetPassword', {
+    userId,
+   newPassword: password                               // هنا الرمز الجديد (forgot password)
   })
   .then(response => {
-    if (response.data === true) {
+    if (response.data.success === true) {
       console.log('Password change was successful');                        //اذا انرسل وكل شي كويس ترجع ترو
       setShowNewPassword(false); 
       setSuccessfull(true);
-    } else if (response.data === false) {                                             
+    } else if (response.data.success === false) {                                             
       console.log('Password change was not successful');                      //اذا فيه مشكله وما انحفط في الداتا بيس ترجع فولس
       setUnsuccessfull(true);
     }
@@ -228,7 +233,7 @@ console.log('Sending this data to the backend:', email, passwords);             
       <div className='backgroundimage'>
       <Header_1/>
   
-      <p className='middle'>
+      <div className='middle'>
 
       <div id="login-form">
       <h1>sign in</h1>
@@ -308,7 +313,7 @@ console.log('Sending this data to the backend:', email, passwords);             
           
 <form onSubmit={HandleNewPasswordSubmit}>
 
-<FloatingLabel controlId="floatingPassword" label="Password">
+<FloatingLabel controlId="floatingPassword2" label="Password">
   <Form.Control name="password" type="password" placeholder="" value={formData.password} onChange={handleChange} />
 </FloatingLabel>
         {errors.password && <div className="error">{errors.password}</div>}
@@ -354,10 +359,11 @@ console.log('Sending this data to the backend:', email, passwords);             
  </div>
 
 
-    </p>
+    </div>
     <Footer_1/>
     </div>
     </>
     );
 }
+
 export default Sign_in;
