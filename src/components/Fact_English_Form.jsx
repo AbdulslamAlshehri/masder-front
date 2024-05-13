@@ -60,6 +60,7 @@ const Text_Form_Component = () => {
       var percentage = response.data.percentage * 100;
       percentage = percentage.toFixed(2);
       set_Percentage(percentage)
+      Submit_Form()
     } catch (error) {
       console.error('Error uploading text', error);
       set_Upload_Status('Error uploading text');
@@ -92,7 +93,7 @@ const Text_Form_Component = () => {
             )}
             {text && !error_Visible ? (
               <div style={{ textAlign: "center" }}>                                         
-                <Button variant="dark" className={"D12 D11"} type="submit" onClick={Submit_Form} centered>Submit</Button>
+                <Button variant="dark" className={"D12 D11"} type="submit" centered>Submit</Button>
               </div>
             ) : (
               <div style={{ textAlign: "center" }}>
