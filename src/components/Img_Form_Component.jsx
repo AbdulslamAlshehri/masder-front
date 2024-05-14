@@ -61,7 +61,7 @@ const Image_Form_Component = () => {
     Form_Data.append('image', image);
 
     try {
-      const Response = await axios.post('YOUR_IMAGE_API_ENDPOINT', Form_Data, {
+      const Response = await axios.post('https://masdar2-production.up.railway.app/ai/image', Form_Data, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -170,7 +170,7 @@ const Image_Form_Component = () => {
             )}
             {image_Preview ? (
               <div style={{ textAlign: "center" }}>
-                <Button className={"D12 D11"} variant="dark" type="submit" onClick={Submit_Form} centered>Submit</Button>
+                <Button className={"D12 D11"} variant="dark" type="submit" centered>Submit</Button>
               </div>
             ) : (
               <div style={{ textAlign: "center" }}>
