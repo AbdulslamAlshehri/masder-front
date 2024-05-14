@@ -63,7 +63,7 @@ console.log('Sending this data to the backend:', email, passwords);             
     if (response.data.success === true) {
       // If the backend returns true, the login was successful                              //اذا صح وموجوده ترجع ترو      
       console.log('Login successful');
-    navigate('/testingpage');
+    navigate('/MainPage');
     localStorage.setItem('userId', response.data._id);
     localStorage.setItem('token', response.data.token);
     } else if(response.data.success === false){
