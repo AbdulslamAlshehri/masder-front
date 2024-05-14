@@ -52,7 +52,7 @@ const Text_Form_Component = () => {
     console.log('Show Text submitted:', text);
 
     try {
-      const response = await axios.post('https://masdar-production.up.railway.app/predict/ar', { text });
+      const response = await axios.post('https://masdar-production.up.railway.app/predict/en', { text });
 
       console.log('Text uploaded successfully', response.data);
       set_Upload_Status('Text uploaded successfully');
