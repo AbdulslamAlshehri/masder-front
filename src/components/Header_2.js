@@ -46,7 +46,7 @@ import axios from "axios";
     
       const token = localStorage.getItem('token');
 
-  axios.get('http://localhost:5000/api/users/me',{
+  axios.get('masdar2-production.up.railway.app/api/users/me',{
     headers: {
       'Authorization': `Bearer ${token}`
     }
