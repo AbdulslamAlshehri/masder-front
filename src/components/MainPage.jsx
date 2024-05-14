@@ -25,10 +25,11 @@ const MainPage = () => {
 
   return (
     <>
+      <div className='backgroundimage'>
      <Header_2/>
-    <div className="BG" style={{marginTop:"100px"}}>
-
-      <div style={{ background: "white", margin: "20px", borderRadius: "5px", minHeight: "600px", color: "black", padding: "50px" }}>
+      <div className="middle">
+    
+        
       <h1 className={"centered Main_Page_Title"} style={{ textAlign: "center" }}>{Current_Page === 'Ai_Check_Page' ? 'Content Verfication' : 'Claim Authentication'}</h1>
         
         <div style={{textAlign:"center"}}>
