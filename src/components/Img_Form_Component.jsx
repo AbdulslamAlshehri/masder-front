@@ -69,10 +69,8 @@ const Image_Form_Component = () => {
 
       console.log('Image uploaded successfully', Response.data);
       set_Upload_Status('Image uploaded successfully');
-        var percentage = Response.data.score * 100;
-        percentage = percentage.toFixed(2);
-        set_Percentage(percentage);
-        setContentType("Text");
+        set_Percentage(Response.data.verdict);
+        setContentType("Image");
         Submit_Form();
     } catch (Error) {
       console.Error('Error uploading image', Error);
@@ -210,7 +208,7 @@ const Image_Form_Component = () => {
 
             </Row>
             <Row>
-              <Col style={{ textAlign: "center" }}>AI</Col>
+              <Col style={{ textAlign: "center" }}>Verdict</Col>
               <Col style={{ textAlign: "center" }}>Content Type</Col>
 
             </Row>
