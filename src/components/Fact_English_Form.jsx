@@ -62,7 +62,7 @@ const Text_Form_Component = () => {
       set_Determination_Result("Fake");
       set_Percentage(percentage)}
       else{
-        if(percentage > 40){
+        if(percentage > 50){
       set_Determination_Result("Most likely Fake");
       set_Percentage(percentage)}
         percentage = 100 - percentage
