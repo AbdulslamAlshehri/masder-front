@@ -17,7 +17,7 @@ function History() {
   ///////////////////////////////////////////////////////////////////////////////////////////ما فيه شي فوق ///////////////////////////////////////////////////////////////////////////////////
 
 
-    axios.get('http://localhost:5000/api/history/all/',{    //endpoints 
+    axios.get('masdar2-production.up.railway.app/api/history/all/',{    //endpoints 
       headers: {
         'Authorization': `Bearer ${token}`
       }
