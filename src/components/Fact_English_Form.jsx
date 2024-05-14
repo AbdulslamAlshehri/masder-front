@@ -58,12 +58,12 @@ const Text_Form_Component = () => {
       set_Upload_Status('Text uploaded successfully');
       var percentage = response.data.prediction * 100;
       percentage = percentage.toFixed(2);
-      if(percentage > 60){
-      set_Determination_Result("True");
+      if(percentage > 50){
+      set_Determination_Result("Fake");
       set_Percentage(percentage)}
       else{
         percentage = 100 - percentage
-        set_Determination_Result("Fake");
+        set_Determination_Result("True");
         set_Percentage(percentage)}
       
       Submit_Form();
