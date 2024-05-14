@@ -202,12 +202,10 @@ const Voice_Form_Component = () => {
             <Row>
               <Col style={{ textAlign: "center" }}><h5 style={{fontSize:"30px"}}>{percentage}%</h5></Col>
               <Col style={{ textAlign: "center" }}><h5 style={{fontSize:"30px"}}>{contentType}</h5></Col>
-              <Col style={{ textAlign: "center" }}><h5 style={{fontSize:"30px"}}>{SubmitHistory}</h5></Col>
             </Row>
             <Row>
               <Col style={{ textAlign: "center" }}>AI</Col>
               <Col style={{ textAlign: "center" }}>Content Type</Col>
-              <Col style={{ textAlign: "center" }}>Submit Date</Col>
             </Row>
           </Container>
         </div>
