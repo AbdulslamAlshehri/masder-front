@@ -29,7 +29,7 @@ const MainPage = () => {
     <div className="BG" style={{marginTop:"100px"}}>
 
       <div style={{ background: "white", margin: "20px", borderRadius: "5px", minHeight: "600px", color: "black", padding: "50px" }}>
-      <h1 className={"centered Main_Page_Title"} style={{ textAlign: "center" }}>{Current_Page === 'Ai_Check_Page' ? 'AI Check' : 'Fact Check'}</h1>
+      <h1 className={"centered Main_Page_Title"} style={{ textAlign: "center" }}>{Current_Page === 'Ai_Check_Page' ? 'Content Verfication' : 'Claim Authentication'}</h1>
         
         <div style={{textAlign:"center"}}>
         <ToggleButtonGroup style={{margin:"10px 0px 10px 0px",borderRadius:"18px"}} type="radio" name="options" defaultValue={1}>
