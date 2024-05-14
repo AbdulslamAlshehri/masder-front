@@ -34,13 +34,13 @@ const MainPage = () => {
         <div style={{textAlign:"center"}}>
         <ToggleButtonGroup style={{margin:"10px 0px 10px 0px",borderRadius:"18px"}} type="radio" name="options" defaultValue={1}>
         <ToggleButton className={`main-page-buttons ${selectedValue === 1 ? 'default-button' : ''}`} style={{borderRadius:"18px"}} variant="dark"  id="tbg-radio-1" value={1} onClick={() => handleSelection(1, () => set_Current_Page('Ai_Check_Page'))}>
-        AI Check
+        Content Verfication
         </ToggleButton>
         <ToggleButton size="sm" style={{visibility: "hidden"}} id="tbg-radio-2" value={2}>
          
         </ToggleButton>
         <ToggleButton className={`main-page-buttons ${selectedValue === 3 ? 'default-button' : ''}`} style={{borderRadius:"18px"}} variant="dark" id="tbg-radio-3" value={3} onClick={() => handleSelection(3, () => set_Current_Page('Fact_Check_Page'))}>
-          Fact Check 
+          Claim Authentication
         </ToggleButton>
     </ToggleButtonGroup>
     <br/>
