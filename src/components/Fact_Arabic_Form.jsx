@@ -62,6 +62,9 @@ const Fact_Arabic_Form = () => {
       if(percentage > 60){
       set_Determination_Result("خبر صحيح");
       set_Percentage(percentage)}
+        if(percentage > 40){
+      set_Determination_Result("على الأرجح زائف");
+      set_Percentage(percentage)}
       else{
         percentage = 100 - percentage
         set_Determination_Result("خبر زائف");
