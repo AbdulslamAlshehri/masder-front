@@ -6,6 +6,7 @@ import Fact_Check_Component from "./Fact_Check_Component.jsx.jsx";
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import Header_2 from './Header_2';
+import Footer_1 from './Footer_1';
 function Ai_Check_Page() {
   return <Ai_Check_Component/>;
 }
@@ -56,6 +57,7 @@ const MainPage = () => {
 
       </div>
     </div>
+      <Footer_1/>
   </>
   )
 }
