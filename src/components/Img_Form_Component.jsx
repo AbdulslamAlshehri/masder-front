@@ -69,6 +69,11 @@ const Image_Form_Component = () => {
 
       console.log('Image uploaded successfully', Response.data);
       set_Upload_Status('Image uploaded successfully');
+        var percentage = response.data.score * 100;
+        percentage = percentage.toFixed(2);
+        set_Percentage(percentage);
+        setContentType("Text");
+        Submit_Form();
     } catch (Error) {
       console.Error('Error uploading image', Error);
       set_Upload_Status('Error uploading image');
